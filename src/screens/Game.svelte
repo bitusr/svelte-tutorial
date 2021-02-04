@@ -14,6 +14,8 @@
 		loadDetails(round.b),
 	]))
 
+	const results = Array(selection.length)
+
 	let i = 0
 	let last_result
 
@@ -24,6 +26,7 @@
 
 		await sleep(1500)
 
+		results[i] = last_result
 		last_result = null
 
 		if (i < selection.length - 1) {
@@ -74,8 +77,20 @@
 	>
 {/if}
 
-<div class="results">
-	<p>results</p>
+<div
+	class="results"
+	style="grid-template-columns: repeat({results.length}, 1fr)"
+>
+	{#each results as result}
+		<span class="result">
+			{#if result}
+				<img
+					src="/icons/{result}.svg"
+					alt="{result} answer"
+				>
+			{/if}
+		</span>
+	{/each}
 </div>
 
 <style>
@@ -111,13 +126,35 @@
 		opacity: 0.5;
 	}
 
+	.results {
+        display: grid;
+        grid-gap: 0.2em;
+        width: 100%;
+        max-width: 320px;
+        margin: 1em auto 0 auto;
+	}
+
+	.result {
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        padding: 0 0 100% 0;
+        transition: background 0.2s;
+        transition-delay: 0.2s;
+	}
+
+	.result img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+	}
+
     @media (min-width: 640px) {
         .game {
 			max-width: 100%;
 			grid-template-rows: none;
 			grid-template-columns: 1fr 8em 1fr;
-			/* Safari bug */
-			/*max-height: calc(100vh - 60em);*/
 		}
 
 		.same {
