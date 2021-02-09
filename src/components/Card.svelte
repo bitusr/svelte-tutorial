@@ -2,6 +2,8 @@
 	import { createEventDispatcher } from 'svelte'
 
 	export let celeb
+	export let showPrice
+	export let winner
 
 	const dispatch = createEventDispatcher()
 </script>
@@ -20,6 +22,14 @@
 			</h2>
 			<p class="type">{celeb.type}</p>
 		</div>
+
+		{#if showPrice}
+			<!-- class:large is a class directive -->
+			<!-- class:large={winner} - add class "large" if the winner is truthy -->
+			<div class="price" class:large={winner}>
+				<span>${celeb.price}</span>
+			</div>
+		{/if}
 	</button>
 </div>
 
@@ -58,6 +68,25 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+	}
+
+	.price {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.3);
+		color: white;
+		font-size: 4em;
+		font-weight: 700;
+	}
+
+	.price.large {
+		font-size: 6em;
 	}
 
 	@media (min-width: 640px) {
