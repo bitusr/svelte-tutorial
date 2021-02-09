@@ -48,6 +48,8 @@
 		width: 100%;
 		height: 100%;
 		padding: 0;
+		border-radius: var(--border-radius);
+		box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 		background: 50% 0 no-repeat;
 		background-size: cover;
 		overflow: hidden;

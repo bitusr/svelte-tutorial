@@ -80,8 +80,9 @@
 
     button {
         display: block;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
+        width: 100%;
+        padding-top: 1em;
+        padding-bottom: 1em;
         padding-left: 1em;
         padding-right: 1em;
         margin-top: 0;
