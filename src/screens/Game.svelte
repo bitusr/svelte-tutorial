@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
-	import { fly } from 'svelte/transition'
+	import { fly, crossfade } from 'svelte/transition'
 	import * as eases from 'svelte/easing'
 	import Card from '../components/Card.svelte'
 	import { sleep, pick_random, loadImage } from '../utils'
@@ -8,6 +8,11 @@
 	export let selection
 
 	const dispatch = createEventDispatcher()
+
+	const [send, receive] = crossfade({
+		easing: eases.cubicOut,
+		duration: 300,
+	})
 
 	const loadDetails = async (celeb) => {
 		const resp = await fetch(`https://cameo-explorer.netlify.app/celebs/${celeb.id}.json`)
@@ -62,6 +67,8 @@
 
 		results[i] = last_result
 		last_result = null
+
+		await sleep(500)
 
 		if (i < selection.length - 1) {
 			i += 1
@@ -124,9 +131,11 @@
 
 {#if last_result}
 	<img
+		class="giant-result"
 		src="/icons/{last_result}.svg"
 		alt="{last_result} answer"
-		class="giant-result"
+		in:fly={{x: 100, duration: 200}}
+		out:send={{key: i}}
 	>
 {/if}
 
@@ -134,12 +143,13 @@
 	class="results"
 	style="grid-template-columns: repeat({results.length}, 1fr)"
 >
-	{#each results as result}
+	{#each results as result, j}
 		<span class="result">
 			{#if result}
 				<img
 					src="/icons/{result}.svg"
 					alt="{result} answer"
+					in:receive={{key: j}}
 				>
 			{/if}
 		</span>
