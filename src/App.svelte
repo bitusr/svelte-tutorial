@@ -3,6 +3,7 @@
 	import Welcome from './screens/Welcome.svelte'
 	import Game from './screens/Game.svelte'
 	import { select } from './select'
+	import { loadImage } from './utils'
 
 	let celebsPromise
 	let state = 'welcome' // or playing
@@ -41,7 +42,10 @@
 	}
 
 	onMount(() => {
-		 celebsPromise = loadCelebs()
+		celebsPromise = loadCelebs()
+
+		loadImage('/icons/right.svg')
+		loadImage('/icons/wrong.svg')
 	})
 </script>
 

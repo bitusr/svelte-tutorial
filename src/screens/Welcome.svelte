@@ -68,4 +68,36 @@
         left: 0.02em;
         text-indent: -9999px;
     }
+
+    .categories {
+        width: 100%;
+        max-width: 26em;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    button {
+        display: block;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-top: 0;
+        margin-bottom: 0.2em;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    @media (min-width: 640px) {
+        button {
+            display: inline;
+            width: auto;
+            margin-top: 0;
+            margin-bottom: 0.4em;
+            margin-left: 0.2em;
+            margin-right: 0.2em;
+        }
+    }
 </style>
