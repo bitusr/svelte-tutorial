@@ -1,5 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte'
+	import { scale } from 'svelte/transition'
+	import { elasticOut } from 'svelte/easing'
 
 	export let celeb
 	export let showPrice
@@ -27,7 +29,7 @@
 			<!-- class:large is a class directive -->
 			<!-- class:large={winner} - add class "large" if the winner is truthy -->
 			<div class="price" class:large={winner}>
-				<span>${celeb.price}</span>
+				<span in:scale={{easing: elasticOut, duration: 600}}>${celeb.price}</span>
 			</div>
 		{/if}
 	</button>
